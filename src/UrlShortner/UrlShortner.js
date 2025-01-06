@@ -2,121 +2,126 @@ import React, { useState, useCallback } from 'react';
 import './UrlShortner.css';
 
 const UrlShortener = () => {
-  const [url, setUrl] = useState('');
-  const [shortenedUrl, setShortenedUrl] = useState('');
-  const [error, setError] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
-  const [isCopied, setIsCopied] = useState(false);
+        const [url, setUrl] = useState('');
+        const [shortenedUrl, setShortenedUrl] = useState('');
+        const [error, setError] = useState('');
+        const [isLoading, setIsLoading] = useState(false);
+        const [isCopied, setIsCopied] = useState(false);
 
-  const handleInputChange = (event) => {
-    setUrl(event.target.value);
-    // Reset states when input changes
-    setError('');
-    setShortenedUrl('');
-    setIsCopied(false);
-  };
+        const handleInputChange = (event) => {
+            setUrl(event.target.value);
+            // Reset states when input changes
+            setError('');
+            setShortenedUrl('');
+            setIsCopied(false);
+        };
 
-  const copyToClipboard = async (text) => {
-    try {
-      await navigator.clipboard.writeText(text);
-      setIsCopied(true);
-      setTimeout(() => setIsCopied(false), 2000); // Reset copy state after 2 seconds
-    } catch (err) {
-      console.error('Failed to copy:', err);
-    }
-  };
+        const copyToClipboard = async(text) => {
+            try {
+                await navigator.clipboard.writeText(text);
+                setIsCopied(true);
+                setTimeout(() => setIsCopied(false), 2000); // Reset copy state after 2 seconds
+            } catch (err) {
+                console.error('Failed to copy:', err);
+            }
+        };
 
-  const BASE_URL = 'http://18.208.214.158:7000';
+        const BASE_URL = 'http://13.61.9.207:7000';
 
-  const handleButtonClick = useCallback(async () => {
-    if (!url) {
-      setError('Please enter a valid URL.');
-      return;
-    }
+        const handleButtonClick = useCallback(async() => {
+            if (!url) {
+                setError('Please enter a valid URL.');
+                return;
+            }
 
-    setError('');
-    setIsLoading(true);
-    setShortenedUrl('');
-    setIsCopied(false);
+            setError('');
+            setIsLoading(true);
+            setShortenedUrl('');
+            setIsCopied(false);
 
-    try {
-      const apiUrl = `${BASE_URL}/url/shorten?longUrl=${url}`;
-      
-      const response = await fetch(apiUrl, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        }
-      });
+            try {
+                const apiUrl = `${BASE_URL}/url/shorten?longUrl=${url}`;
 
-      if (!response.ok) {
-        throw new Error('Failed to shorten the URL. Please try again.');
-      }
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                });
 
-      // Get the shortCode as plain text
-      const shortCode = await response.text();
-      // Construct the full shortened URL
-      const fullShortUrl = `${BASE_URL}/url/${shortCode}`;
+                if (!response.ok) {
+                    throw new Error('Failed to shorten the URL. Please try again.');
+                }
 
-      setShortenedUrl(fullShortUrl);
-    } catch (error) {
-      setError(error.message || 'An unexpected error occurred. Please try again.');
-    } finally {
-      setIsLoading(false);
-    }
-  }, [url]);
+                // Get the shortCode as plain text
+                const shortCode = await response.text();
+                // Construct the full shortened URL
+                const fullShortUrl = `${BASE_URL}/url/${shortCode}`;
 
-  const handleKeyPress = (event) => {
-    if (event.key === 'Enter') {
-      handleButtonClick();
-    }
-  };
+                setShortenedUrl(fullShortUrl);
+            } catch (error) {
+                setError(error.message || 'An unexpected error occurred. Please try again.');
+            } finally {
+                setIsLoading(false);
+            }
+        }, [url]);
 
-  return (
-    <div>
-      <div className="shortener-box">
-        <h1>Shorten a long link</h1>
-        <div className="input-container">
-          <input
-            type="text"
-            placeholder="https://example.com/my-long-url"
-            className="url-input"
-            value={url}
-            onChange={handleInputChange}
-            onKeyPress={handleKeyPress}
-            disabled={isLoading}
-          />
+        const handleKeyPress = (event) => {
+            if (event.key === 'Enter') {
+                handleButtonClick();
+            }
+        };
 
-          <button 
-            className={`shorten-button ${isLoading ? 'loading' : ''}`} 
-            onClick={handleButtonClick}
-            disabled={isLoading}
-          >
-            {isLoading ? 'Shortening...' : 'Get your link for free →'}
-          </button>
-        </div>
+        return ( <
+            div >
+            <
+            div className = "shortener-box" >
+            <
+            h1 > Shorten a long link < /h1> <
+            div className = "input-container" >
+            <
+            input type = "text"
+            placeholder = "https://example.com/my-long-url"
+            className = "url-input"
+            value = { url }
+            onChange = { handleInputChange }
+            onKeyPress = { handleKeyPress }
+            disabled = { isLoading }
+            />
 
-        {error && <div className="error-message">{error}</div>}
+            <
+            button className = { `shorten-button ${isLoading ? 'loading' : ''}` }
+            onClick = { handleButtonClick }
+            disabled = { isLoading } > { isLoading ? 'Shortening...' : 'Get your link for free →' } <
+            /button> < /
+            div >
 
-        {shortenedUrl && (
-          <div className="result-container">
-            <p className="shortened-url">
-              Your shortened URL: 
-              <a href={shortenedUrl} target="_blank" rel="noopener noreferrer">
-                {shortenedUrl}
-              </a>
-              <button 
-                className={`copy-button ${isCopied ? 'copied' : ''}`}
-                onClick={() => copyToClipboard(shortenedUrl)}
-              >
-                {isCopied ? 'Copied!' : 'Copy'}
-              </button>
-            </p>
-          </div>
-        )}
-      </div>
-    </div>
-  );
-};
+            {
+                error && < div className = "error-message" > { error } < /div>}
 
-export default UrlShortener;
+                {
+                    shortenedUrl && ( <
+                        div className = "result-container" >
+                        <
+                        p className = "shortened-url" >
+                        Your shortened URL:
+                        <
+                        a href = { shortenedUrl }
+                        target = "_blank"
+                        rel = "noopener noreferrer" > { shortenedUrl } <
+                        /a> <
+                        button className = { `copy-button ${isCopied ? 'copied' : ''}` }
+                        onClick = {
+                            () => copyToClipboard(shortenedUrl)
+                        } > { isCopied ? 'Copied!' : 'Copy' } <
+                        /button> < /
+                        p > <
+                        /div>
+                    )
+                } <
+                /div> < /
+                div >
+            );
+        };
+
+        export default UrlShortener;
