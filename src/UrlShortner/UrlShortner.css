@@ -1,0 +1,145 @@
+.shortener-box {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  color: #34495e;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.input-container {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.url-input {
+  flex: 1;
+  padding: 12px 16px;
+  font-size: 16px;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  transition: border-color 0.3s ease;
+}
+
+.url-input:focus {
+  outline: none;
+  border-color: #3498db;
+}
+
+.url-input:disabled {
+  background-color: #f5f5f5;
+  cursor: not-allowed;
+}
+
+.shorten-button {
+  padding: 12px 24px;
+  font-size: 16px;
+  color: white;
+  background-color: #3498db;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  white-space: nowrap;
+}
+
+.shorten-button:hover:not(:disabled) {
+  background-color: #2980b9;
+}
+
+.shorten-button:disabled {
+  background-color: #bdc3c7;
+  cursor: not-allowed;
+}
+
+.shorten-button.loading {
+  position: relative;
+  cursor: wait;
+}
+
+.error-message {
+  color: #e74c3c;
+  margin-top: 1rem;
+  text-align: center;
+}
+
+.result-container {
+  margin-top: 2rem;
+  padding: 1rem;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+}
+
+.shortened-url {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 0;
+  padding: 0.5rem;
+  font-size: 16px;
+}
+
+.shortened-url a {
+  color: #3498db;
+  text-decoration: none;
+  word-break: break-all;
+}
+
+.shortened-url a:hover {
+  text-decoration: underline;
+}
+
+.copy-button {
+  padding: 8px 16px;
+  font-size: 14px;
+  color: #3498db;
+  background-color: transparent;
+  border: 1px solid #3498db;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.copy-button:hover {
+  background-color: #3498db;
+  color: white;
+}
+
+.copy-button.copied {
+  background-color: #2ecc71;
+  border-color: #2ecc71;
+  color: white;
+}
+
+@media (max-width: 600px) {
+  .shortener-box {
+    margin: 1rem;
+    padding: 1rem;
+  }
+
+  .input-container {
+    flex-direction: column;
+  }
+
+  .shorten-button {
+    width: 100%;
+  }
+
+  .shortened-url {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .copy-button {
+    width: 100%;
+    margin-top: 0.5rem;
+  }
+}
+  

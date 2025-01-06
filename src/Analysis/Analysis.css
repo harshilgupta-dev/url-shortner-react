@@ -1,0 +1,54 @@
+.analysis-container {
+    margin: 0px 20px;
+    padding: 20px;
+    border-radius: 8px;
+  }
+  
+  .analysis-container h2 {
+    font-size: 1.8rem;
+    color: #0b1234;
+    margin-bottom: 20px;
+  }
+  
+  .analysis-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    border-radius: 8px; 
+    overflow: hidden; 
+  }
+  
+  .analysis-table th,
+  .analysis-table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .analysis-table th {
+    background-color: #0052cc;
+    color: white;
+    font-weight: bold;
+  }
+  
+  .analysis-table tr:hover {
+    background-color: #f1f1f1;
+  }
+  
+  .analysis-table td {
+    color: #555;
+  }
+  
+  .analysis-table td a {
+    text-decoration: none;
+    color: #4CAF50;
+  }
+  
+  .analysis-table td a:hover {
+    text-decoration: underline;
+  }
+  
+  .error-message {
+    color: red !important;
+    margin-top: 10px;
+  }
